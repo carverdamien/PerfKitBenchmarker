@@ -9,12 +9,13 @@ services:
   master:
     build: .
     links:
+      - influxdb:influxdb
       - slave1:slave1
       - slave2:slave2
     volumes_from:
       - ssh
     entrypoint: [ "./pkb.py" ]
-    command: [ "--benchmarks=kernel_compile", "--machine_type=f1-micro", "--benchmark_config_file=config.yaml", "--zones=zone", "--ip_addresses=EXTERNAL" ]
+    command: [ "--benchmarks=iperf", "--machine_type=f1-micro", "--benchmark_config_file=config.yaml", "--zones=zone", "--ip_addresses=EXTERNAL", "--influx_uri=influxdb:8086" ]
   slave1:
     build: ./slave
     volumes_from:
@@ -27,3 +28,19 @@ services:
       - ssh
     volumes:
       - /data
+  influxdb:
+    image: influxdb:latest
+    container_name: influxdb
+    environment:
+      - INFLUXDB_DATA_ENGINE=tsm1
+    ports:
+      - 8083
+      - 8086
+      - 8090
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "80:3000"
+    links:
+      - influxdb
