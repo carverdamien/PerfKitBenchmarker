@@ -4,11 +4,15 @@ static_vms:
     internal_ip: slave1
     user_name: root
     ssh_private_key: /root/.ssh/id_rsa
+    disk_specs:
+      - mount_point: /data
   - &vm2
     ip_address: slave2
     internal_ip: slave2
     user_name: root
     ssh_private_key: /root/.ssh/id_rsa
+    disk_specs:
+      - mount_point: /data
 
 iperf:
   vm_groups:
@@ -38,6 +42,12 @@ redis_ycsb:
         - *vm2
 
 silo:
+  vm_groups:
+    default:
+      static_vms:
+        - *vm1
+
+kernel_compile:
   vm_groups:
     default:
       static_vms:

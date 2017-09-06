@@ -14,12 +14,16 @@ services:
     volumes_from:
       - ssh
     entrypoint: [ "./pkb.py" ]
-    command: [ "--benchmarks=silo", "--machine_type=f1-micro", "--benchmark_config_file=config.yaml", "--zones=zone", "--ip_addresses=EXTERNAL" ]
+    command: [ "--benchmarks=kernel_compile", "--machine_type=f1-micro", "--benchmark_config_file=config.yaml", "--zones=zone", "--ip_addresses=EXTERNAL" ]
   slave1:
     build: ./slave
     volumes_from:
       - ssh
+    volumes:
+      - /data
   slave2:
     build: ./slave
     volumes_from:
       - ssh
+    volumes:
+      - /data
