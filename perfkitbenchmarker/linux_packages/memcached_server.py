@@ -109,7 +109,7 @@ def ConfigureAndStart(server):
   for scratch_disk in server.scratch_disks:
     server.RemoteCommand('sudo umount %s' % scratch_disk.mount_point)
 
-  server.RemoteCommand('cd {mcdir}; ./memcached -m {size} '
+  server.RemoteCommand('cd {mcdir}; ./memcached -u root -m {size} '
                        '&> /dev/null &'.format(
                            mcdir=MEMCACHED_DIR, size=FLAGS.memcached_size_mb))
   _WaitForServerUp(server)
