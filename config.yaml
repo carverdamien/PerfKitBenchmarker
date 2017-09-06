@@ -36,3 +36,9 @@ redis_ycsb:
     clients:
       static_vms:
         - *vm2
+
+silo:
+  vm_groups:
+    default:
+      static_vms:
+        - *vm1
