@@ -14,4 +14,4 @@ COPY setup.py ./setup.py
 COPY tests ./tests
 COPY tools ./tools
 COPY tox.ini ./tox.ini
-COPY iperf.yaml ./iperf.yaml
+COPY config.yaml ./config.yaml

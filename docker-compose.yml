@@ -10,11 +10,16 @@ services:
     build: .
     links:
       - slave1:slave1
+      - slave2:slave2
     volumes_from:
       - ssh
     entrypoint: [ "./pkb.py" ]
-    command: [ "--benchmarks=iperf", "--machine_type=f1-micro", "--benchmark_config_file=iperf.yaml", "--zones=zone", "--ip_addresses=EXTERNAL" ]
+    command: [ "--benchmarks=memcached_ycsb", "--machine_type=f1-micro", "--benchmark_config_file=config.yaml", "--zones=zone", "--ip_addresses=EXTERNAL" ]
   slave1:
+    build: ./slave
+    volumes_from:
+      - ssh
+  slave2:
     build: ./slave
     volumes_from:
       - ssh

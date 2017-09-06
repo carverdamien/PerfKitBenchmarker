@@ -1,0 +1,30 @@
+static_vms:
+  - &vm1
+    ip_address: slave1
+    internal_ip: slave1
+    user_name: root
+    ssh_private_key: /root/.ssh/id_rsa
+  - &vm2
+    ip_address: slave2
+    internal_ip: slave2
+    user_name: root
+    ssh_private_key: /root/.ssh/id_rsa
+
+iperf:
+  vm_groups:
+    vm_1:
+      static_vms:
+        - *vm1
+    vm_2:
+      static_vms:
+        - *vm2
+
+
+memcached_ycsb:
+  vm_groups:
+    servers:
+      static_vms:
+        - *vm1
+    clients:
+      static_vms:
+        - *vm2
