@@ -14,7 +14,7 @@ services:
     volumes_from:
       - ssh
     entrypoint: [ "./pkb.py" ]
-    command: [ "--benchmarks=memcached_ycsb", "--machine_type=f1-micro", "--benchmark_config_file=config.yaml", "--zones=zone", "--ip_addresses=EXTERNAL" ]
+    command: [ "--benchmarks=redis_ycsb", "--machine_type=f1-micro", "--benchmark_config_file=config.yaml", "--zones=zone", "--ip_addresses=EXTERNAL" ]
   slave1:
     build: ./slave
     volumes_from:

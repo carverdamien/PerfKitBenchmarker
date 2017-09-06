@@ -19,10 +19,18 @@ iperf:
       static_vms:
         - *vm2
 
-
 memcached_ycsb:
   vm_groups:
     servers:
+      static_vms:
+        - *vm1
+    clients:
+      static_vms:
+        - *vm2
+
+redis_ycsb:
+  vm_groups:
+    workers:
       static_vms:
         - *vm1
     clients:
